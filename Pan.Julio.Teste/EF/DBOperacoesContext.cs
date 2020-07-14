@@ -29,8 +29,7 @@ namespace Pan.Julio.Teste.EF
         //Conexão
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            //options.UseSqlServer(_config.GetValue(typeof(string), "StringConexao").ToString());
-            options.UseSqlServer("Data Source=192.168.0.5\\ftsharp;Initial Catalog=TestePan;User Id=sa;Password=1Gordo@1");
+            options.UseSqlServer("Data Source=192.168.0.5\\ftsharp;Initial Catalog=TestePan;User Id=;Password=");
         }
 
         //Dados Iniciais
