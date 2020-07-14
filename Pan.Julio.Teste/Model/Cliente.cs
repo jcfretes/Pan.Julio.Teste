@@ -13,12 +13,14 @@ namespace Pan.Julio.Teste.Model
         public int IdCliente { get; set; }
 
         [Required]
-        public int IdTipoCliente { get; set; }
+        public bool IcPessoaFisica { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string NmCliente { get; set; }
                
         [Required]
+        [MaxLength(20)]
         public string NuDocumento { get; set; }
 
     }

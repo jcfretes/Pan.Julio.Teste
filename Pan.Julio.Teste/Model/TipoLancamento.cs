@@ -13,6 +13,7 @@ namespace Pan.Julio.Teste.Model
         public int IdTipoLancamento { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string NmTipoLancamento { get; set; }
 
     }

@@ -32,20 +32,33 @@ namespace Pan.Julio.Teste.Migrations
                     b.Property<int>("IcAtivo")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdTipoCliente")
-                        .HasColumnType("int");
+                    b.Property<bool>("IcPessoaFisica")
+                        .HasColumnType("bit");
 
                     b.Property<string>("NmCliente")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("NuDocumento")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.HasKey("IdCliente");
 
                     b.ToTable("Cliente");
+
+                    b.HasData(
+                        new
+                        {
+                            IdCliente = 1,
+                            DtCriacao = new DateTime(2020, 7, 14, 16, 47, 53, 680, DateTimeKind.Local).AddTicks(2367),
+                            IcAtivo = 1,
+                            IcPessoaFisica = true,
+                            NmCliente = "Julio Cesar Fretes",
+                            NuDocumento = "11111111111"
+                        });
                 });
 
             modelBuilder.Entity("Pan.Julio.Teste.Model.ContaCorrente", b =>
@@ -54,9 +67,6 @@ namespace Pan.Julio.Teste.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ClienteIdCliente")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("DtAbertura")
                         .HasColumnType("datetime2");
@@ -78,9 +88,29 @@ namespace Pan.Julio.Teste.Migrations
 
                     b.HasKey("IdContaCorrente");
 
-                    b.HasIndex("ClienteIdCliente");
-
                     b.ToTable("ContaCorrente");
+
+                    b.HasData(
+                        new
+                        {
+                            IdContaCorrente = 1,
+                            DtAbertura = new DateTime(2020, 7, 14, 16, 47, 53, 680, DateTimeKind.Local).AddTicks(4485),
+                            DtCriacao = new DateTime(2020, 7, 14, 16, 47, 53, 680, DateTimeKind.Local).AddTicks(5879),
+                            DtUltOperacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IcAtivo = 1,
+                            IdCliente = 1,
+                            VlSaldo = 1000m
+                        },
+                        new
+                        {
+                            IdContaCorrente = 2,
+                            DtAbertura = new DateTime(2020, 7, 14, 16, 47, 53, 680, DateTimeKind.Local).AddTicks(6134),
+                            DtCriacao = new DateTime(2020, 7, 14, 16, 47, 53, 680, DateTimeKind.Local).AddTicks(6168),
+                            DtUltOperacao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IcAtivo = 1,
+                            IdCliente = 1,
+                            VlSaldo = 1000m
+                        });
                 });
 
             modelBuilder.Entity("Pan.Julio.Teste.Model.Lancamentos", b =>
@@ -89,9 +119,6 @@ namespace Pan.Julio.Teste.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ContaCorrenteIdContaCorrente")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("DtCriacao")
                         .HasColumnType("datetime2");
@@ -111,22 +138,10 @@ namespace Pan.Julio.Teste.Migrations
                     b.Property<int>("IdTipoOperacao")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TipoLancamentoIdTipoLancamento")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TipoOperacaoIdTipoOperacao")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("VlOperacao")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("IdLancamento");
-
-                    b.HasIndex("ContaCorrenteIdContaCorrente");
-
-                    b.HasIndex("TipoLancamentoIdTipoLancamento");
-
-                    b.HasIndex("TipoOperacaoIdTipoOperacao");
 
                     b.ToTable("Lancamentos");
                 });
@@ -146,7 +161,8 @@ namespace Pan.Julio.Teste.Migrations
 
                     b.Property<string>("NmTipoLancamento")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("IdTipoLancamento");
 
@@ -156,14 +172,14 @@ namespace Pan.Julio.Teste.Migrations
                         new
                         {
                             IdTipoLancamento = 1,
-                            DtCriacao = new DateTime(2020, 7, 14, 16, 11, 25, 803, DateTimeKind.Local).AddTicks(4080),
+                            DtCriacao = new DateTime(2020, 7, 14, 16, 47, 53, 676, DateTimeKind.Local).AddTicks(1462),
                             IcAtivo = 1,
                             NmTipoLancamento = "Débito"
                         },
                         new
                         {
                             IdTipoLancamento = 2,
-                            DtCriacao = new DateTime(2020, 7, 14, 16, 11, 25, 805, DateTimeKind.Local).AddTicks(3852),
+                            DtCriacao = new DateTime(2020, 7, 14, 16, 47, 53, 677, DateTimeKind.Local).AddTicks(8879),
                             IcAtivo = 1,
                             NmTipoLancamento = "Crédito"
                         });
@@ -184,7 +200,8 @@ namespace Pan.Julio.Teste.Migrations
 
                     b.Property<string>("NmTipoOperacao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("IdTipoOperacao");
 
@@ -194,67 +211,45 @@ namespace Pan.Julio.Teste.Migrations
                         new
                         {
                             IdTipoOperacao = 1,
-                            DtCriacao = new DateTime(2020, 7, 14, 16, 11, 25, 807, DateTimeKind.Local).AddTicks(4670),
+                            DtCriacao = new DateTime(2020, 7, 14, 16, 47, 53, 679, DateTimeKind.Local).AddTicks(8665),
                             IcAtivo = 1,
                             NmTipoOperacao = "Transferencia"
                         },
                         new
                         {
                             IdTipoOperacao = 2,
-                            DtCriacao = new DateTime(2020, 7, 14, 16, 11, 25, 807, DateTimeKind.Local).AddTicks(4749),
+                            DtCriacao = new DateTime(2020, 7, 14, 16, 47, 53, 679, DateTimeKind.Local).AddTicks(8730),
                             IcAtivo = 1,
                             NmTipoOperacao = "Doc"
                         },
                         new
                         {
                             IdTipoOperacao = 3,
-                            DtCriacao = new DateTime(2020, 7, 14, 16, 11, 25, 807, DateTimeKind.Local).AddTicks(4753),
+                            DtCriacao = new DateTime(2020, 7, 14, 16, 47, 53, 679, DateTimeKind.Local).AddTicks(8734),
                             IcAtivo = 1,
                             NmTipoOperacao = "Ted"
                         },
                         new
                         {
                             IdTipoOperacao = 4,
-                            DtCriacao = new DateTime(2020, 7, 14, 16, 11, 25, 807, DateTimeKind.Local).AddTicks(4755),
+                            DtCriacao = new DateTime(2020, 7, 14, 16, 47, 53, 679, DateTimeKind.Local).AddTicks(8737),
                             IcAtivo = 1,
                             NmTipoOperacao = "Depósito"
                         },
                         new
                         {
                             IdTipoOperacao = 5,
-                            DtCriacao = new DateTime(2020, 7, 14, 16, 11, 25, 807, DateTimeKind.Local).AddTicks(4757),
+                            DtCriacao = new DateTime(2020, 7, 14, 16, 47, 53, 679, DateTimeKind.Local).AddTicks(8740),
                             IcAtivo = 1,
                             NmTipoOperacao = "Saque"
                         },
                         new
                         {
                             IdTipoOperacao = 6,
-                            DtCriacao = new DateTime(2020, 7, 14, 16, 11, 25, 807, DateTimeKind.Local).AddTicks(4759),
+                            DtCriacao = new DateTime(2020, 7, 14, 16, 47, 53, 679, DateTimeKind.Local).AddTicks(8742),
                             IcAtivo = 1,
                             NmTipoOperacao = "Pagamento"
                         });
-                });
-
-            modelBuilder.Entity("Pan.Julio.Teste.Model.ContaCorrente", b =>
-                {
-                    b.HasOne("Pan.Julio.Teste.Model.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteIdCliente");
-                });
-
-            modelBuilder.Entity("Pan.Julio.Teste.Model.Lancamentos", b =>
-                {
-                    b.HasOne("Pan.Julio.Teste.Model.ContaCorrente", null)
-                        .WithMany("Lancamentos")
-                        .HasForeignKey("ContaCorrenteIdContaCorrente");
-
-                    b.HasOne("Pan.Julio.Teste.Model.TipoLancamento", "TipoLancamento")
-                        .WithMany()
-                        .HasForeignKey("TipoLancamentoIdTipoLancamento");
-
-                    b.HasOne("Pan.Julio.Teste.Model.TipoOperacao", "TipoOperacao")
-                        .WithMany()
-                        .HasForeignKey("TipoOperacaoIdTipoOperacao");
                 });
 #pragma warning restore 612, 618
         }

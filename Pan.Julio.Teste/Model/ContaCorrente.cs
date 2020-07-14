@@ -25,15 +25,5 @@ namespace Pan.Julio.Teste.Model
         [Required]
         public DateTime DtUltOperacao { get; set; }
 
-        #region Relacionamentos
-
-        //Objeto de Valor
-        public Cliente Cliente { get; set; }
-
-        //Agregado
-        public List<Lancamentos> Lancamentos { get; set; }
-
-        #endregion
-
     }
 }

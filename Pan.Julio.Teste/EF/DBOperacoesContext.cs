@@ -24,6 +24,7 @@ namespace Pan.Julio.Teste.EF
         public DbSet<ContaCorrente> ContaCorrente { get; set; }
         public DbSet<TipoLancamento> TipoLancamento { get; set; }
         public DbSet<TipoOperacao> TipoOperacao { get; set; }
+        public DbSet<Lancamentos> Lancamentos { get; set; }
 
         //Conexão
         protected override void OnConfiguring(DbContextOptionsBuilder options)
@@ -32,7 +33,7 @@ namespace Pan.Julio.Teste.EF
             options.UseSqlServer("Data Source=192.168.0.5\\ftsharp;Initial Catalog=TestePan;User Id=sa;Password=1Gordo@1");
         }
 
-        //Dados e Relacionamentos
+        //Dados Iniciais
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -48,6 +49,18 @@ namespace Pan.Julio.Teste.EF
                 new TipoOperacao() { IdTipoOperacao = 4, NmTipoOperacao = "Depósito", DtCriacao = DateTime.Now, IcAtivo = 1 },
                 new TipoOperacao() { IdTipoOperacao = 5, NmTipoOperacao = "Saque", DtCriacao = DateTime.Now, IcAtivo = 1 },
                 new TipoOperacao() { IdTipoOperacao = 6, NmTipoOperacao = "Pagamento", DtCriacao = DateTime.Now, IcAtivo = 1 }
+                );
+
+            modelBuilder.Entity<Cliente>().HasData(
+                new Cliente() { IdCliente = 1, NmCliente = "Julio Cesar Fretes", IcPessoaFisica = true, NuDocumento = "11111111111", DtCriacao = DateTime.Now, IcAtivo = 1 }
+                );
+
+            modelBuilder.Entity<ContaCorrente>().HasData(
+                new ContaCorrente() { IdContaCorrente = 1, IdCliente = 1, DtAbertura = DateTime.Now, VlSaldo = 1000, DtCriacao = DateTime.Now, IcAtivo = 1 }
+                );
+
+            modelBuilder.Entity<ContaCorrente>().HasData(
+                new ContaCorrente() { IdContaCorrente = 2, IdCliente = 1, DtAbertura = DateTime.Now, VlSaldo = 1000, DtCriacao = DateTime.Now, IcAtivo = 1 }
                 );
         }
 

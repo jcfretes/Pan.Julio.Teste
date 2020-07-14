@@ -28,15 +28,5 @@ namespace Pan.Julio.Teste.Model
         [Required]
         public decimal VlOperacao { get; set; }
 
-        #region Relacionamentos
-
-        //Objeto de Valor
-        public TipoOperacao TipoOperacao { get; set; }
-
-        //Objeto de Valor
-        public TipoLancamento TipoLancamento { get; set; }
-
-        #endregion
-
     }
 }

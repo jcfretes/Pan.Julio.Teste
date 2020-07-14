@@ -27,7 +27,7 @@ namespace Pan.Julio.Teste
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<Pan.Julio.Teste.EF.DBOperacoesContext>();
-            services.AddScoped<OperacoesService>();
+            services.AddScoped<IOperacoesService, OperacoesService>();
 
             services.AddControllers();
 
